@@ -51,6 +51,17 @@ class DetailsComponent extends Component {
     return name;
   };
 
+  getQty = (rest_id, id, cart) => {
+    let qty = 0;
+
+    cart.items.forEach((item) => {
+      if (item.restaurantId == rest_id && item.id == id) {
+        qty = item.qty;
+      }
+    });
+    console.log("qty" + qty);
+    return qty;
+  };
   handleAdd = (cart, cart_item) => {
     let push = true;
     let cartItem = {
@@ -68,15 +79,38 @@ class DetailsComponent extends Component {
         push = false;
       }
     });
-    if(push){cart.items.push(cartItem);}
-    
+    if (push) {
+      
+     
+      cart.items.push(cartItem);
+    }
+
     cart.total = cart.total + cart_item.cost;
 
-    console.log(cart);
+    this.setState({
+      restaurantId: this.props.restaurantId
+    });
   };
 
-  handleRemove = (cart, itemId) => {
-    console.log(cart);
+  handleRemove = (cart, item) => {
+    cart.items.forEach((ci, index) => {
+      if (ci.restaurantId == this.state.restaurantId && ci.id == item.id) {
+        ci.qty = ci.qty - 1;
+        ci.s_total = ci.cost * ci.qty;
+
+        cart.total = cart.total - item.cost;
+        
+        if (ci.qty == 0) {
+          cart.items.splice(index, 1);
+         
+        }
+      }
+    });
+   
+
+    this.setState({
+      restaurantId: this.props.restaurantId,
+    });
   };
 
   compareIdAndGetItems(restaurantItemIds, commonItems) {
@@ -102,12 +136,16 @@ class DetailsComponent extends Component {
             return (
               <div>
                 <h1>{this.state.restaurentName}</h1>
-                <ItemList
-                  items={this.state.items}
-                  add={this.handleAdd}
-                  remove={this.handleRemove}
-                  cart={Cart}
-                ></ItemList>
+              
+                      <ItemList
+                        items={this.state.items}
+                        add={this.handleAdd}
+                        remove={this.handleRemove}
+                        cart={Cart}
+                        rest_id={this.state.restaurantId}
+                        getQty={this.getQty}
+                      ></ItemList>
+                   
               </div>
             );
           }}

@@ -13,6 +13,10 @@ import RestaurantList from "./components/RestaurantList";
 import CartComponent from './CartComponent'
 import  DetailsComponent  from "./DetailsComponent";
 import { Link } from "@reach/router";
+
+import { CartProvider } from "./contexts/CartContext";
+import {Cart} from './data/Cart';
+
 class HomePage extends Component {
   render() {
     return (
@@ -29,13 +33,16 @@ class HomePage extends Component {
           <div>
             <Container>
               <div>
+              <CartProvider value={Cart}>
                 <Router>
                   <RestaurantList path="/"> </RestaurantList>
                   
+                  
                   <DetailsComponent path="/details/:restaurantId"></DetailsComponent>
-
+                 
                   <CartComponent path="/cart"></CartComponent>
                 </Router>
+                </CartProvider>
               </div>
             </Container>
           </div>
