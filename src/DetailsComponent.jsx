@@ -64,6 +64,7 @@ class DetailsComponent extends Component {
       restaurantId: this.state.restaurantId,
       restaurantName: this.state.restaurentName,
       qty: 1,
+      s_total : cart_item.cost,
       ...cart_item,
     };
 
@@ -71,7 +72,7 @@ class DetailsComponent extends Component {
 
       if(ci.restaurantId == this.state.restaurantId && ci.id==cartItem.id){
         ci.qty = ci.qty+1;
-        ci.cost = 
+        ci.s_total =  ci.s_total* ci.qty;
       }
     })
 

@@ -10,17 +10,19 @@ import {
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 
 import RestaurantList from "./components/RestaurantList";
-
+import CartComponent from './CartComponent'
 import  DetailsComponent  from "./DetailsComponent";
+import { Link } from "@reach/router";
 class HomePage extends Component {
   render() {
     return (
+
       <>
         <CssBaseline />
         <AppBar position="relative">
           <Toolbar>
             <Typography variant="h6"> Restaurant </Typography>
-            <ShoppingCartOutlinedIcon edge="end"> </ShoppingCartOutlinedIcon>
+            <Link to="/cart"> <ShoppingCartOutlinedIcon edge="end"> </ShoppingCartOutlinedIcon> </Link>
           </Toolbar>
         </AppBar>
         <main>
@@ -29,7 +31,10 @@ class HomePage extends Component {
               <div>
                 <Router>
                   <RestaurantList path="/"> </RestaurantList>
+                  
                   <DetailsComponent path="/details/:restaurantId"></DetailsComponent>
+
+                  <CartComponent path="/cart"></CartComponent>
                 </Router>
               </div>
             </Container>
