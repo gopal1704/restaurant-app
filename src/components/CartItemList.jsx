@@ -9,9 +9,9 @@ export default function CartItemList(props) {
           <ListItem button>
             <ListItemText primary={item.title} />
             <ListItemText primary={item.restaurantName} />
-           
-
-            <ListItemSecondaryAction> <ListItemText primary={item.cost} /></ListItemSecondaryAction>
+            <ListItemText primary={item.qty} />
+            <ListItemText primary={item.cost} />
+            <ListItemSecondaryAction>   <ListItemText primary={item.s_total} /></ListItemSecondaryAction>
           </ListItem>
         );
       })}

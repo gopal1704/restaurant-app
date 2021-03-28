@@ -21,7 +21,7 @@ class HomePage extends Component {
         <CssBaseline />
         <AppBar position="relative">
           <Toolbar>
-            <Typography variant="h6"> Restaurant </Typography>
+          <Link to="/">  <Typography variant="h6"> Restaurant </Typography></Link>
             <Link to="/cart"> <ShoppingCartOutlinedIcon edge="end"> </ShoppingCartOutlinedIcon> </Link>
           </Toolbar>
         </AppBar>

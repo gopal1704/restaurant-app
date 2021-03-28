@@ -24,62 +24,54 @@ class DetailsComponent extends Component {
       if (Restaurants[i].id == this.state.restaurantId) {
         listItems = this.compareIdAndGetItems(Restaurants[i].items, items);
         console.log(listItems);
-        this.setState({ items: listItems },
-          ()=>{
-
-            let resName = this.getRestaurantName();
-            console.log(resName);
-            if (resName) {
-              this.setState({
-                restaurentName: resName,
-              });
-            }
+        this.setState({ items: listItems }, () => {
+          let resName = this.getRestaurantName();
+          console.log(resName);
+          if (resName) {
+            this.setState({
+              restaurentName: resName,
+            });
           }
-          );
+        });
         break;
       }
     }
-   
   }
 
   getRestaurantName = () => {
     let name = null;
     Restaurants.forEach((restaurant) => {
-      console.log( this.state.restaurantId);
-    
+      console.log(this.state.restaurantId);
+
       if (restaurant.id == this.state.restaurantId) {
-        console.log(restaurant.name)
+        console.log(restaurant.name);
         name = restaurant.name;
-        
       }
     });
     return name;
   };
 
   handleAdd = (cart, cart_item) => {
-
-     
-
+    let push = true;
     let cartItem = {
       restaurantId: this.state.restaurantId,
       restaurantName: this.state.restaurentName,
       qty: 1,
-      s_total : cart_item.cost,
+      s_total: cart_item.cost,
       ...cart_item,
     };
 
-    cart.items.forEach((ci)=>{
-
-      if(ci.restaurantId == this.state.restaurantId && ci.id==cartItem.id){
-        ci.qty = ci.qty+1;
-        ci.s_total =  ci.s_total* ci.qty;
+    cart.items.forEach((ci) => {
+      if (ci.restaurantId == this.state.restaurantId && ci.id == cartItem.id) {
+        ci.qty = ci.qty + 1;
+        ci.s_total = ci.cost * ci.qty;
+        push = false;
       }
-    })
+    });
+    if(push){cart.items.push(cartItem);}
+    
+    cart.total = cart.total + cart_item.cost;
 
-    cart.items.push(cartItem);
-    cart.total = cart.total+cart_item.cost;
-
-  
     console.log(cart);
   };
 
