@@ -1,9 +1,9 @@
 import React, { Component } from "react";
+import { Router } from "@reach/router";
 import {
   Typography,
   AppBar,
   CssBaseline,
-  Grid,
   Toolbar,
   Container,
 } from "@material-ui/core";
@@ -11,6 +11,7 @@ import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 
 import RestaurantList from "./components/RestaurantList";
 
+import  DetailsComponent  from "./DetailsComponent";
 class HomePage extends Component {
   render() {
     return (
@@ -26,7 +27,10 @@ class HomePage extends Component {
           <div>
             <Container>
               <div>
-                <RestaurantList> </RestaurantList>
+                <Router>
+                  <RestaurantList path="/"> </RestaurantList>
+                  <DetailsComponent path="/details/:restaurantId"></DetailsComponent>
+                </Router>
               </div>
             </Container>
           </div>
